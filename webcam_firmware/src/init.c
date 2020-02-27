@@ -6,8 +6,10 @@
  */ 
 
 #include <asf.h>
-#include <board.h>
-#include <conf_board.h>
+#include "board.h""
+#include "conf_board.h>"
+#include "gpio.h"
+#include "ioport.h"
 
 void board_init(void)
 {

@@ -5,7 +5,7 @@
  *  Author: david
  */ 
 
-#include "Camera.h"
+#include "camera.h"
 
 uint8_t *g_p_uc_cap_dest_buf;
 uint16_t g_us_cap_rows = IMAGE_HEIGHT;
