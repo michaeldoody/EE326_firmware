@@ -5,6 +5,7 @@
  *  Author: david
  */ 
 
+#include <asf.h>
 #include "camera.h"
 
 uint8_t *g_p_uc_cap_dest_buf;
