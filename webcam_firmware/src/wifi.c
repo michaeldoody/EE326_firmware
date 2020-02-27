@@ -103,7 +103,7 @@ void process_incoming_byte_wifi(uint8_t in_byte) {
 	input_line_wifi[input_pos_wifi++ ] = in_byte;
 }
 
-void process_data_wifi() {
+void process_data_wifi(void) {
 	if (strstr(input_line_wifi, "Unknown command")) {
 		ioport_toggle_pin_level(PIN_LED);
 	}
