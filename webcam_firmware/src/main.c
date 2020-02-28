@@ -1,5 +1,8 @@
 #include <asf.h>
 #include "wifi.h"
+#include "camera.h"
+#include "conf_board.h"
+#include "conf_clock.h"
 
 int main (void)
 {

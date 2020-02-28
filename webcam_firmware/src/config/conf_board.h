@@ -8,7 +8,14 @@
  * Support and FAQ: visit <a href="https://www.microchip.com/support/">Microchip Support</a>
  */
 
-#ifndef CONF_BOARD_H
-#define CONF_BOARD_H
+#ifndef CONF_BOARD_H_
+#define CONF_BOARD_H_
 
-#endif // CONF_BOARD_H
+#define PIN_LED                       PIO_PA20_IDX
+#define WIFI_CTS_PIN                  PIO_PA7_IDX
+#define IMAGE_WIDTH                    (320UL)
+#define IMAGE_HEIGHT                   (240UL)
+
+
+
+#endif /* CONF_BOARD_H_ */

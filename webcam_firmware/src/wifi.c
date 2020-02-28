@@ -99,11 +99,26 @@ void configure_wifi_command_pin(void)
 	pio_enable_interrupt(PUSH_BUTTON_PIO, PUSH_BUTTON_PIN_MSK);
 }
 
+void configure_wifi_web_setup_pin(void)
+{
+	
+}
+
+void write_wifi_command(char* comm, uint8 t cnt)
+{
+	
+}
+
+void write_image_to_file(void)
+{
+	
+}
+
 void process_incoming_byte_wifi(uint8_t in_byte) {
 	input_line_wifi[input_pos_wifi++ ] = in_byte;
 }
 
-void process_data_wifi() {
+void process_data_wifi(void) {
 	if (strstr(input_line_wifi, "Unknown command")) {
 		ioport_toggle_pin_level(PIN_LED);
 	}
