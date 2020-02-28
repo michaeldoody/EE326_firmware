@@ -50,5 +50,6 @@ void process_data_wifi();
 volatile char input_line_wifi[1000];
 volatile uint32_t received_byte_wifi;
 volatile unsigned int input_pos_wifi;
+volatile uint32_t wifi_setup_button_flag = false;
 
 #endif /* WIFI_H_ */
