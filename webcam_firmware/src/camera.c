@@ -32,6 +32,28 @@ static void init_vsync_interrupts(void)
 	NVIC_EnableIRQ((IRQn_Type)OV7740_VSYNC_ID);
 }
 
+static void configure_twi(void)
+{
+	twi_options_t opt;
+	
+	/* Enable TWI peripheral */
+	pmc_enable_periph_clk(ID_BOARD_TWI);
+
+	/* Init TWI peripheral */
+	opt.master_clk = sysclk_get_cpu_hz();
+	opt.speed      = TWI_CLK;
+	twi_master_init(BOARD_TWI, &opt);
+
+	/* Configure TWI interrupts */
+	NVIC_DisableIRQ(BOARD_TWI_IRQn);
+	NVIC_ClearPendingIRQ(BOARD_TWI_IRQn);
+	NVIC_SetPriority(BOARD_TWI_IRQn, 0);
+	NVIC_EnableIRQ(BOARD_TWI_IRQn);
+	
+}
+
+
+
 static void pio_capture_init(Pio *p_pio, uint32_t ul_id)
 {
 	/* Enable peripheral clock */
@@ -75,6 +97,79 @@ uint32_t ul_size)
 		return 0;
 	}
 }
+
+void ov_power(uint32_t ul_on_off, Pio* const p_pio, const uint32_t ul_mask)
+{
+	if (ul_on_off) {
+		pio_clear(p_pio, ul_mask);
+		} else {
+		pio_set(p_pio, ul_mask);
+	}
+}
+
+uint32_t twi_master_init(Twi *p_twi, const twi_options_t *p_opt)
+{
+	uint32_t status = TWI_SUCCESS;
+
+	/* Disable TWI interrupts */
+	p_twi->TWI_IDR = ~0UL;
+
+	/* Dummy read in status register */
+	p_twi->TWI_SR;
+
+	/* Reset TWI peripheral */
+	twi_reset(p_twi);
+
+	twi_enable_master_mode(p_twi);
+
+	/* Select the speed */
+	if (twi_set_speed(p_twi, p_opt->speed, p_opt->master_clk) == FAIL) {
+		/* The desired speed setting is rejected */
+		status = TWI_INVALID_ARGUMENT;
+	}
+
+	if (p_opt->smbus == 1) {
+		p_twi->TWI_CR = TWI_CR_QUICK;
+	}
+
+	return status;
+}
+
+
+
+static void init_camera(void)
+{
+	/* Init Vsync handler*/
+	init_vsync_interrupts();
+
+	/* Init PIO capture*/
+	pio_capture_init(OV_DATA_BUS_PIO, OV_DATA_BUS_ID);
+
+	/* Turn on ov7740 image sensor using power pin */
+	ov_power(true, OV_POWER_PIO, OV_POWER_MASK);
+
+	/* Init PCK0 to work at 24 Mhz */
+	/* 96/4=24 Mhz */
+	PMC->PMC_PCK[0] = (PMC_PCK_PRES_CLK_4 | PMC_PCK_CSS_PLLA_CLK);
+	PMC->PMC_SCER = PMC_SCER_PCK0;
+	while (!(PMC->PMC_SCSR & PMC_SCSR_PCK0)) {
+	}
+	
+}
+
+static void configure_camera(void)
+{
+	/* ov7740 Initialization */
+	while (ov_init(BOARD_TWI) == 1) {
+	}
+
+	/* ov7740 configuration */
+	ov_configure(BOARD_TWI, QVGA_YUV422_20FPS);
+
+	/* Wait 3 seconds to let the image sensor to adapt to environment */
+	delay_ms(3000);
+}
+
 
 static void start_capture(void)
 {
