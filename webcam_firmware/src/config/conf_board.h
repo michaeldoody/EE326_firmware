@@ -8,7 +8,6 @@
  * Support and FAQ: visit <a href="https://www.microchip.com/support/">Microchip Support</a>
  */
 
-
 #ifndef CONF_BOARD_H_
 #define CONF_BOARD_H_
 
