@@ -577,6 +577,21 @@
     <None Include="src\config\conf_clock.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\ov2640.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ov2640.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ov2640_table_registers.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\timer_interface.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\timer_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\wifi.c">
       <SubType>compile</SubType>
     </Compile>

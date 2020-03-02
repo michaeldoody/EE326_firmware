@@ -8,10 +8,7 @@
 #include <asf.h>
 #include "camera.h"
 
-uint8_t *g_p_uc_cap_dest_buf;
-uint16_t g_us_cap_rows = IMAGE_HEIGHT;
 static volatile uint32_t g_ul_vsync_flag = false;
-uint16_t g_us_cap_line = (IMAGE_WIDTH * 2);
 
 void vsync_handler(uint32_t ul_id, uint32_t ul_mask)
 {
@@ -83,7 +80,7 @@ void pio_capture_init(Pio *p_pio, uint32_t ul_id)
 
 }
 
-uint8_t pio_capture_to_buffer(Pio *p_pio, uint8_t *uc_buf,
+static uint8_t pio_capture_to_buffer(Pio *p_pio, uint8_t *uc_buf,
 uint32_t ul_size)
 {
 	/* Check if the first PDC bank is free */
