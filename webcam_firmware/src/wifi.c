@@ -13,8 +13,6 @@ volatile uint32_t wifi_setup_button_flag = false;
 
 void wifi_usart_handler(void)
 {
-	// Handler for incoming data from the WiFi.
-	
 	uint32_t ul_status;
 
 	/* Read USART status. */
@@ -88,26 +86,41 @@ void configure_usart_wifi(void)
 void configure_wifi_command_pin(void)
 {
 	/* Configure PIO clock. */
-	pmc_enable_periph_clk(PUSH_BUTTON_ID);
+	pmc_enable_periph_clk(WIFI_COMM_ID);
 
 	/* Adjust PIO debounce filter using a 10 Hz filter. */
-	pio_set_debounce_filter(PUSH_BUTTON_PIO, PUSH_BUTTON_PIN_MSK, 10);
+	pio_set_debounce_filter(WIFI_COMM_PIO, WIFI_COMM_PIN_MSK, 10);
 
 	/* Initialize PIO interrupt handler, see PIO definition in conf_board.h
 	**/
-	pio_handler_set(PUSH_BUTTON_PIO, PUSH_BUTTON_ID, PUSH_BUTTON_PIN_MSK,
-			PUSH_BUTTON_ATTR, wifi_command_response_handler);
+	pio_handler_set(WIFI_COMM_PIO, WIFI_COMM_ID, WIFI_COMM_PIN_MSK,
+			WIFI_COMM_ATTR, wifi_command_response_handler);
 
 	/* Enable PIO controller IRQs. */
-	NVIC_EnableIRQ((IRQn_Type)PUSH_BUTTON_ID);
+	NVIC_EnableIRQ((IRQn_Type)WIFI_COMM_ID);
 
 	/* Enable PIO interrupt lines. */
-	pio_enable_interrupt(PUSH_BUTTON_PIO, PUSH_BUTTON_PIN_MSK);
+	pio_enable_interrupt(WIFI_COMM_PIO, WIFI_COMM_PIN_MSK);
 }
 
 void configure_wifi_web_setup_pin(void)
 {
-	
+	/* Configure PIO clock. */
+	pmc_enable_periph_clk(WEB_SETUP_BUTTON_ID);
+
+	/* Adjust PIO debounce filter using a 10 Hz filter. */
+	pio_set_debounce_filter(WEB_SETUP_BUTTON_PIO, WEB_SETUP_BUTTON_PIN_MSK, 10);
+
+	/* Initialize PIO interrupt handler, see PIO definition in conf_board.h
+	**/
+	pio_handler_set(WEB_SETUP_BUTTON_PIO, WEB_SETUP_BUTTON_ID, WEB_SETUP_BUTTON_PIN_MSK,
+			WEB_SETUP_BUTTON_ATTR, wifi_command_response_handler);
+
+	/* Enable PIO controller IRQs. */
+	NVIC_EnableIRQ((IRQn_Type)WEB_SETUP_BUTTON_ID);
+
+	/* Enable PIO interrupt lines. */
+	pio_enable_interrupt(WEB_SETUP_BUTTON_PIO, WEB_SETUP_BUTTON_PIN_MSK);
 }
 
 void write_wifi_command(char* comm, uint8 t cnt)
@@ -121,13 +134,11 @@ void write_image_to_file(void)
 }
 
 void process_incoming_byte_wifi(uint8_t in_byte) {
-	// Stores incoming byte from wifi chip in a buffer
 	
 	input_line_wifi[input_pos_wifi++ ] = in_byte;
 }
 
 void process_data_wifi(void) {
-	//Proce
 	
 	if (strstr(input_line_wifi, "Unknown command")) {
 		ioport_toggle_pin_level(PIN_LED);

@@ -12,7 +12,7 @@
 #include <string.h>
 
 #define BOARD_ID_USART             ID_USART0
-#define WIFI_USART                USART0
+#define WIFI_USART				   USART0
 #define BOARD_USART_BAUDRATE       115200
 #define USART_Handler              USART0_Handler
 #define USART_IRQn                 USART0_IRQn
@@ -36,10 +36,16 @@
 #define PIN_WIFI_RTS_IDX        (PIO_PA7_IDX)
 #define PIN_WIFI_RTS_FLAGS      (PIO_PERIPH_A | PIO_DEFAULT)
 
-#define PUSH_BUTTON_ID                 ID_PIOB
-#define PUSH_BUTTON_PIO                PIOB
-#define PUSH_BUTTON_PIN_MSK            PIO_PB10
-#define PUSH_BUTTON_ATTR               PIO_IT_RISE_EDGE
+#define WIFI_COMM_ID            ID_PIOB
+#define WIFI_COMM_PIO           PIOB
+#define WIFI_COMM_PIN_MSK       PIO_PB10
+#define WIFI_COMM_ATTR          PIO_IT_RISE_EDGE
+
+#define WEB_SETUP_BUTTON_ID            ID_PIOA
+#define WEB_SETUP_BUTTON_PIO           PIOA
+#define WEB_SETUP_BUTTON_PIN_MSK       PIO_PA22
+#define WEB_SETUP_BUTTON_ATTR          PIO_IT_RISE_EDGE
+
 
 void configure_usart_wifi(void);
 void configure_wifi_command_pin(void);
