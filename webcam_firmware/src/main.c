@@ -14,6 +14,9 @@ int main (void)
 	configure_wifi_command_pin();
 
 	while (1) {
+		if (wifi_setup_button_flag){
+			
+		}
 		delay_ms(500);
 		usart_write_line(WIFI_USART, "Hello\r\n");
 	}

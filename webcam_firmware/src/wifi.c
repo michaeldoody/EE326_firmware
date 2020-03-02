@@ -9,9 +9,12 @@
 
 volatile uint32_t received_byte_wifi = 0;
 volatile unsigned int input_pos_wifi = 0;
+volatile uint32_t wifi_setup_button_flag = false;
 
 void wifi_usart_handler(void)
 {
+	// Handler for incoming data from the WiFi.
+	
 	uint32_t ul_status;
 
 	/* Read USART status. */
@@ -36,7 +39,10 @@ static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask)
 
 void wifi_web_setup_handler(uint32_t ul_id, uint32_t ul_mask)
 {
+	unused(ul_id);
+	unused(ul_mask);
 	
+	wifi_setup_button_flag = true;
 }
 
 void configure_usart_wifi(void)
@@ -115,10 +121,14 @@ void write_image_to_file(void)
 }
 
 void process_incoming_byte_wifi(uint8_t in_byte) {
+	// Stores incoming byte from wifi chip in a buffer
+	
 	input_line_wifi[input_pos_wifi++ ] = in_byte;
 }
 
 void process_data_wifi(void) {
+	//Proce
+	
 	if (strstr(input_line_wifi, "Unknown command")) {
 		ioport_toggle_pin_level(PIN_LED);
 	}
