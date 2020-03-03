@@ -9,10 +9,10 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
-#define OV7740_VSYNC_PIO			PIOA
-#define OV7740_VSYNC_ID				ID_PIOA
-#define OV7740_VSYNC_MASK			PIO_PA15
-#define OV7740_VSYNC_TYPE			PIO_PULLUP
+#define OV2640_VSYNC_PIO			PIOA
+#define OV2640_VSYNC_ID				ID_PIOA
+#define OV2640_VSYNC_MASK			PIO_PA15
+#define OV2640_VSYNC_TYPE			PIO_PULLUP
 #define OV_POWER_PIO				PIOC
 #define OV_VSYNC_MASK				PIO_PA15_IDX
 
@@ -30,7 +30,7 @@
 #define OV_HSYNC_MASK               PIO_PA16
 #define OV_HSYNC_PIO                PIOA
 #define OV_HSYNC_ID                 ID_PIOA
-#define OV_HSYNC_TYPE				IO_PULLUP
+#define OV_HSYNC_TYPE				PIO_PULLUP
 
 
 
