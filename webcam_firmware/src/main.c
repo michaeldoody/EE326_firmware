@@ -15,21 +15,40 @@ int main (void)
 	configure_wifi_command_pin();
 	configure_wifi_web_setup_pin();
 	
-	// TODO - pull down Wifi pin
-	delay_ms(100);
-	// TODO - set Wifi pin high
 	
+	//ioport_set_pin_level(WIFI_RESET_PIN, 0);
+	delay_ms(100);
+	//ioport_set_pin_level(WIFI_RESET_PIN, 1);
+	
+	init_camera();
+	configure_camera();
 
-	while (1) { //wait for network connection
+	while (ioport_get_pin_level(WIFI_STATUS_PIN)==0) { //wait for network connection
 		if (wifi_setup_button_flag){
-			
+			write_wifi_command(web setup);
+			delay_ms(100);
+			wifi_setup_button_flag = 0;
 		}
 		
 	}
-	init_camera();
-	configure_camera();
-	// tell Wifi to turn off command prompt and echo
 	
+	// tell Wifi to turn off command prompt and echo
+	while(1) {
+		if(wifi_setup_button_flag){
+			write_wifi_command(web setup);
+			delay_ms(100);
+			wifi_setup_button_flag=0;
+			while (ioport_get_pin_level(WIFI_STATUS_PIN)==0) { //wait for network connection
+				if (wifi_setup_button_flag){
+					write_wifi_command(web setup);
+					delay_ms(100);
+					wifi_setup_button_flag = 0;
+				}
+				
+			}
+		}
+		
+	}
 	
 	
 	
