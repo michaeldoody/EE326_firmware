@@ -144,7 +144,7 @@ void configure_camera(void)
 	ov_configure(BOARD_TWI,JPEG_INIT);
 	ov_configure(BOARD_TWI, YUV422);
 	ov_configure(BOARD_TWI, JPEG);
-	ov_configure(BOARD_TWI, JPEG_320x240);
+	ov_configure(BOARD_TWI, JPEG_640x480);
 
 	/* Wait 3 seconds to let the image sensor to adapt to environment */
 	delay_ms(3000);

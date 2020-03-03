@@ -41,7 +41,7 @@
 #define OV_DATA_BUS_D3              PIO_PA27_IDX
 #define OV_DATA_BUS_D4              PIO_PA28_IDX
 #define OV_DATA_BUS_D5              PIO_PA29_IDX
-#define OV_DATA_BUS_                PIO_PA30_IDX
+#define OV_DATA_BUS_D6              PIO_PA30_IDX
 #define OV_DATA_BUS_D7              PIO_PA31_IDX
 #define OV_DATA_BUS_FLAGS           (PIO_INPUT | PIO_PULLUP)
 #define OV_DATA_BUS_MASK            (0xFF000000UL)
