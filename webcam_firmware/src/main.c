@@ -38,7 +38,12 @@ int main (void)
 	write_wifi_command("set sy i g wlan 20\r\n");
 	write_wifi_command("set sy i g network 19\r\n");
 	write_wifi_command("set sy i g softap 21\r\n");
+	write_wifi_command("set system.cmd.gpio 13\r\n");
+	write_wifi_command("set wl n o 14\r\n");
+	write_wifi_command("save\r\n");
+	write_wifi_command("reboot\r\n");
 	
+		
 	
 	
 	// tell Wifi to turn off command prompt and echo
