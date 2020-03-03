@@ -156,7 +156,7 @@ void write_image_to_file(void)
 	image_length = end_of_image - start_of_image;
 	char string[50] = {0};
 	sprintf(string,"image_transfer %d\r\n", image_length);
-	write_wifi_command(string, 25);
+	write_wifi_command(string, 20);
 	
 	while(!wifi_comm_success)
 	{
