@@ -22,13 +22,13 @@ void init_vsync_interrupts(void)
 {
 	/* Initialize PIO interrupt handler, see PIO definition in conf_board.h
 	**/
-	pio_handler_set(OV7740_VSYNC_PIO, OV7740_VSYNC_ID, OV7740_VSYNC_MASK,
-			OV7740_VSYNC_TYPE, vsync_handler);
+	pio_handler_set(OV2640_VSYNC_PIO, OV2640_VSYNC_ID, OV2640_VSYNC_MASK,
+			OV2640_VSYNC_TYPE, vsync_handler);
 
 	/* Enable PIO controller IRQs */
-	NVIC_EnableIRQ((IRQn_Type)OV7740_VSYNC_ID);
+	NVIC_EnableIRQ((IRQn_Type)OV2640_VSYNC_ID);
 	
-	pio_enable_interrupt(OV7740_VSYNC_PIO, OV7740_VSYNC_MASK)
+	pio_enable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK)
 }
 
 void configure_twi(void)
@@ -72,11 +72,7 @@ void pio_capture_init(Pio *p_pio, uint32_t ul_id)
 	p_pio->PIO_PCMR &= ~((uint32_t)PIO_PCMR_ALWYS);
 	p_pio->PIO_PCMR &= ~((uint32_t)PIO_PCMR_HALFS);
 
-// 	#if !defined(DEFAULT_MODE_COLORED)
-// 	/* Samples only data with even index */
-// 	p_pio->PIO_PCMR |= PIO_PCMR_HALFS;
-// 	p_pio->PIO_PCMR &= ~((uint32_t)PIO_PCMR_FRSTS);
-// 	#endif 
+
 
 }
 
@@ -103,7 +99,7 @@ void init_camera(void)
 {
 	gpio_configure_pin(OV_RST_GPIO, OV_RST_FLAGS);
 	gpio_configure_pin(OV_HSYNC_GPIO, OV_HSYNC_FLAGS);
-	gpio_configure_pin(OV_VSYNC_MASK, OV7740_VSYNC_TYPE);
+	gpio_configure_pin(OV_VSYNC_MASK, OV2640_VSYNC_TYPE);
 	gpio_configure_pin(OV_DATA_BUS_D0, OV_DATA_BUS_FLAGS);
 	gpio_configure_pin(OV_DATA_BUS_D1, OV_DATA_BUS_FLAGS);
 	gpio_configure_pin(OV_DATA_BUS_D2, OV_DATA_BUS_FLAGS);
@@ -119,7 +115,7 @@ void init_camera(void)
 		
 	/* Init Vsync handler*/
 	init_vsync_interrupts();
-	pio_disable_interrupt(OV7740_VSYNC_PIO, OV7740_VSYNC_MASK)
+	pio_disable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK)
 	vsync_flag = false;
 
 	/* Init PIO capture*/
@@ -159,7 +155,7 @@ uint8_t start_capture(void)
 {
 
 	/* Enable vsync interrupt*/
-	pio_enable_interrupt(OV7740_VSYNC_PIO, OV7740_VSYNC_MASK);
+	pio_enable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK);
 
 	/* Capture acquisition will start on rising edge of Vsync signal.
 	 * So wait g_vsync_flag = 1 before start process
@@ -168,7 +164,7 @@ uint8_t start_capture(void)
 	}
 
 	/* Disable vsync interrupt*/
-	pio_disable_interrupt(OV7740_VSYNC_PIO, OV7740_VSYNC_MASK);
+	pio_disable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK);
 
 	/* Enable pio capture*/
 	pio_capture_enable(OV_DATA_BUS_PIO);
