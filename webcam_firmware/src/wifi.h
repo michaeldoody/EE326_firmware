@@ -47,8 +47,14 @@
 #define WEB_SETUP_BUTTON_ATTR          PIO_IT_RISE_EDGE
 
 
+void wifi_usart_handler(void);
+static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask);
+void wifi_web_setup_handler(uint32_t ul_id, uint32_t ul_mask);
 void configure_usart_wifi(void);
 void configure_wifi_command_pin(void);
+void configure_wifi_web_setup_pin(void);
+void write_wifi_command(char* comm, uint8_t cnt);
+void write_image_to_file(void);
 void process_incoming_byte_wifi(uint8_t in_byte);
 void process_data_wifi();
 
@@ -57,5 +63,7 @@ volatile char input_line_wifi[1000];
 volatile uint32_t received_byte_wifi;
 volatile unsigned int input_pos_wifi;
 volatile uint32_t wifi_setup_button_flag = false;
+volatile uint32_t wifi_comm_success = false;
+volatile uint32_t image_length = 0;
 
 #endif /* WIFI_H_ */

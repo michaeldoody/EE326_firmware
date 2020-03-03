@@ -6,10 +6,13 @@
  */
 
 #include "wifi.h"
+#include <string.h>
 
 volatile uint32_t received_byte_wifi = 0;
 volatile unsigned int input_pos_wifi = 0;
 volatile uint32_t wifi_setup_button_flag = false;
+volatile uint32_t counts = 0;
+volatile uint32_t image_length = 0;
 
 void wifi_usart_handler(void)
 {
@@ -29,6 +32,8 @@ static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask)
 {
 	unused(ul_id);
 	unused(ul_mask);
+	
+	wifi_comm_success = true;
 
 	process_data_wifi();
 	for (int jj = 0;jj<1000;jj++) input_line_wifi[jj] = 0;
@@ -114,7 +119,7 @@ void configure_wifi_web_setup_pin(void)
 	/* Initialize PIO interrupt handler, see PIO definition in conf_board.h
 	**/
 	pio_handler_set(WEB_SETUP_BUTTON_PIO, WEB_SETUP_BUTTON_ID, WEB_SETUP_BUTTON_PIN_MSK,
-			WEB_SETUP_BUTTON_ATTR, wifi_command_response_handler);
+			WEB_SETUP_BUTTON_ATTR, wifi_web_setup_handler);
 
 	/* Enable PIO controller IRQs. */
 	NVIC_EnableIRQ((IRQn_Type)WEB_SETUP_BUTTON_ID);
@@ -123,13 +128,36 @@ void configure_wifi_web_setup_pin(void)
 	pio_enable_interrupt(WEB_SETUP_BUTTON_PIO, WEB_SETUP_BUTTON_PIN_MSK);
 }
 
-void write_wifi_command(char* comm, uint8 t cnt)
+void write_wifi_command(char* comm, uint8_t cnt)
 {
+	//Write command to the AMW136
+	usart_write_line(WIFI_USART, comm);
 	
+	//Wait for either an acknowledgment or a timeout
+	counts = 0
+	while (counts < cnt)
+	{
+		if (wifi_comm_success==true)
+		{
+			wifi_comm_success = false;
+			return;
+		}
+	}
+	return;
 }
 
 void write_image_to_file(void)
 {
+	if find_image_len()==0
+	{
+		return;
+	}
+	
+	image_length = end_of_image - start_of_image;
+	char string[50] = {0};
+	sprintf(string,"image_transfer %d\r\n", image_length);
+	write_wifi_command(string, 25);
+	
 	
 }
 
