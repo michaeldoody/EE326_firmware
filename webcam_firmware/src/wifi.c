@@ -158,6 +158,20 @@ void write_image_to_file(void)
 	sprintf(string,"image_transfer %d\r\n", image_length);
 	write_wifi_command(string, 25);
 	
+	while(!wifi_comm_success)
+	{
+		
+	}
+	
+	uint32_t img = start_of_image;
+	while (img < end_of_image)
+	{
+		usart_putchar(WIFI_USART, image_buffer[img]);
+		img++;
+	}
+	
+	usart_write_line(WIFI_USART, "Complete\r\n");
+	delay_s(2);
 	
 }
 

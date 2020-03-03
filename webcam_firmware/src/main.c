@@ -13,6 +13,7 @@ int main (void)
 	configure_tc();
 	configure_usart_wifi();
 	configure_wifi_command_pin();
+	configure_wifi_web_setup_pin();
 	
 	// TODO - pull down Wifi pin
 	delay_ms(100);
