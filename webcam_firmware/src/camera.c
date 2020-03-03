@@ -195,22 +195,23 @@ uint8_t start_capture(void)
 
 
 uint8_t find_image_len(void){
-		uint8_t start_flag = 0;
-		uint32_t cPix = 0;
+		uint8_t start_exists = 0;
+		uint32_t arrSize = 0;
 		start_of_image = 0;
 		end_of_image = 0;
-		while( cPix+1 < IMAGE_MAX){
-			if(image_buffer[cPix] == 0xff && image_buffer[cPix+1] == 0xd8){
-				start_of_image = cPix;
-				start_flag = 1;
+		while( arrSize+1 < IMAGE_MAX){
+			if(image_buffer[arrSize] == 0xff && image_buffer[arrSize+1] == 0xd8){
+				start_of_image = arrSize;
+				start_exists = 1;
 			}
-			if(image_buffer[cPix] == 0xff && image_buffer[cPix+1] == 0xd9 && start_flag == 1){
-				image_end = cPix+2;
+			if(image_buffer[arrSize] == 0xff && image_buffer[arrSize+1] == 0xd9 && start_exists == 1){
+				end_of_image = arrSize+2;
 				return 1;
 			}
+			arrSize = arrSize + 1;
 		}
 		start_of_image = 0;
-		image_end = 0;
+		end_of_image = 0;
 		
 		return 0;
 	}
