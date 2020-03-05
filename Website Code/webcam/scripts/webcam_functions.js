@@ -38,10 +38,13 @@ function doConnect() { // makes a connection and defines callbacks
 function onOpen(evt) { // when handshake is complete:
 	writeToScreen("Connected.");
 	//*** Change the text of the button to read "Stop Webcam" ***//
+    b.innerText = "Stop Webcam:";
 
 	//*** Change the title attribute of the button to display "Click to stop webcam" ***//
+    b.title = "Click to stop webcam";
 
 	//*** Enable the button ***//
+    b.disabled = false;
 
 
 	buttonClicked = false;
@@ -50,11 +53,13 @@ function onOpen(evt) { // when handshake is complete:
 function onClose(evt) { // when socket is closed:
 	writeToScreen("Disconnected. Error: " + evt);
 	//*** Change the text of the button to read "Start Webcam" ***//
-        
-    //*** Change the title attribute of the button to display "Click to start webcam" ***//
-        
-    //*** Enable the button ***//
+    b.innerText = "Start Webcam";    
     
+    //*** Change the title attribute of the button to display "Click to start webcam" ***//
+    b.title = "Click to start Webcam";    
+    
+    //*** Enable the button ***//
+    b.disabled = false;
     
     // If the user never actually clicked the button to stop the webcam, reconnect.
 	if (buttonClicked == false) {
@@ -65,7 +70,8 @@ function onClose(evt) { // when socket is closed:
 
 function onMessage(msg) { // when client receives a WebSocket message because a new image is ready:
 	//*** Display a new timestamp ***//
-	
+	document.getElementById('timestamp').innerText = Date();
+    
 	// Get the image just taken from WiFi chip's RAM.
 	var image = document.getElementById('image');
 	var reader = new FileReader();
@@ -84,17 +90,20 @@ function onError(evt) { // when an error occurs
 	writeToScreen("Websocket error");
 	
 	//*** Change the text of the button to read "Start Webcam" ***//
-		
+	b.innerText = "Start Webcam";
+    
     //*** Change the title attribute of the button to display "Click to start webcam" ***//
-		
+	b.title = "Click to start Webcam";
+    
     //*** Enable the button ***//
-	
+	b.disabled = false;
 	
 	buttonClicked = false;
 }
 
 // Set up event listeners
 //*** When the button is clicked, disable it and set the 'buttonClicked' variable to true, and depending on whether a Websocket is open or not, either run "doConnect()" or "websocket.close()" ***//
+if (buttonClicked == true)
 
 
 // Function to display to the message box
