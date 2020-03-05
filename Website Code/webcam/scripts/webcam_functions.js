@@ -103,7 +103,17 @@ function onError(evt) { // when an error occurs
 
 // Set up event listeners
 //*** When the button is clicked, disable it and set the 'buttonClicked' variable to true, and depending on whether a Websocket is open or not, either run "doConnect()" or "websocket.close()" ***//
-if (buttonClicked == true)
+b.addEventListener("click", clickSocket);
+
+function clickSocket(){
+    b.disable = true;
+    buttonClicked = true;
+    if (b.innerText == "Start Webcam"){
+        doConnect();
+    } else {
+        websocket.close();
+    }
+}
 
 
 // Function to display to the message box

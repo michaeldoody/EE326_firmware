@@ -16,6 +16,7 @@ ul {
     padding-left: 0;
     width:100%;
     margin-top: 0;
+    margin-bottom: 10px;
     
 }
 li {
@@ -54,6 +55,7 @@ li a:last-child{
     position: absolute;
     left: 80%; 
     top:30%;
+    z-index: 0;
 }
 #image {
     display:block;
