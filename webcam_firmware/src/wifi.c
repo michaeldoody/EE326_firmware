@@ -6,13 +6,16 @@
  */
 
 #include "wifi.h"
+#include "camera.h"
 #include <string.h>
 
 volatile uint32_t received_byte_wifi = 0;
 volatile unsigned int input_pos_wifi = 0;
-volatile uint32_t wifi_setup_button_flag = false;
+volatile uint32_t wifi_setup_button_flag;
 volatile uint32_t counts = 0;
-volatile uint32_t image_length = 0;
+volatile uint32_t image_length;
+volatile uint32_t start_image_transfer = 0;
+volatile uint32_t wait_flag = 0;
 
 void wifi_usart_handler(void)
 {
@@ -134,7 +137,7 @@ void write_wifi_command(char* comm, uint8_t cnt)
 	usart_write_line(WIFI_USART, comm);
 	
 	//Wait for either an acknowledgment or a timeout
-	counts = 0
+	counts = 0;
 	while (counts < cnt)
 	{
 		if (wifi_comm_success==true)
@@ -148,7 +151,7 @@ void write_wifi_command(char* comm, uint8_t cnt)
 
 void write_image_to_file(void)
 {
-	if find_image_len()==0
+	if (find_image_len()==0)
 	{
 		return;
 	}
@@ -182,7 +185,10 @@ void process_incoming_byte_wifi(uint8_t in_byte) {
 
 void process_data_wifi(void) {
 	
-	if (strstr(input_line_wifi, "Unknown command")) {
-		ioport_toggle_pin_level(PIN_LED);
+	if (strstr(input_line_wifi, "None")) {
+		wait_flag = 1;
+	} 
+	if (strstr(input_line_wifi, "Image")){
+		start_image_transfer = 1;
 	}
 }

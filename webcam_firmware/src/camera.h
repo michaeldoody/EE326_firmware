@@ -61,22 +61,11 @@
 
 
 #define IMAGE_MAX				50000
-uint8_t image_buffer[MAX_IMAGE_SIZE];
+uint8_t image_buffer[IMAGE_MAX];
 
 volatile uint32_t start_of_image;
 volatile uint32_t end_of_image;
 volatile uint32_t vsync_flag;
-
-typedef struct twi_options {
-	//! MCK for TWI.
-	uint32_t master_clk;
-	//! The baud rate of the TWI bus.
-	uint32_t speed;
-	//! The desired address.
-	uint8_t chip;
-	//! SMBUS mode (set 1 to use SMBUS quick command, otherwise don't).
-	uint8_t smbus;
-} twi_options_t;
 
 
 
@@ -86,6 +75,7 @@ void init_vsync_interrupts(void);
 void configure_twi(void);
 void pio_capture_init(Pio *p_pio, uint32_t ul_id);
 void init_camera(void);
+void configure_camera(void);
 uint8_t start_capture(void);
 uint8_t find_image_len(void);
 

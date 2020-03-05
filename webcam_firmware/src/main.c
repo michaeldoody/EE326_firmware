@@ -3,6 +3,7 @@
 #include "camera.h"
 #include "conf_board.h"
 #include "conf_clock.h"
+#include "timer_interface.h"
 
 int main (void)
 {
@@ -28,9 +29,20 @@ int main (void)
 	init_camera();
 	configure_camera();
 
-	while (ioport_get_pin_level(WIFI_STATUS_PIN)==0) { //wait for network connection
+
+	write_wifi_command("set uart.flow 0 on \r\n", 5);
+	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 5);
+	write_wifi_command("set sy i g wlan 20\r\n", 5);
+	write_wifi_command("set sy i g network 19\r\n", 5);
+	write_wifi_command("set sy i g softap 21\r\n" ,5);
+	write_wifi_command("set system.cmd.gpio 13\r\n", 5);
+	write_wifi_command("set wl n o 14\r\n", 5);
+	write_wifi_command("save\r\n", 5);
+	write_wifi_command("reboot\r\n", 5);
+	
+	while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 		if (wifi_setup_button_flag){
-			write_wifi_command("web setup", 20);
+			write_wifi_command("setup web\r\n", 20);
 			delay_ms(100);
 			wifi_setup_button_flag = 0;
 		}
@@ -40,15 +52,10 @@ int main (void)
 
 	// tell wifi to turn off command prompt and echo
 	
-	write_wifi_command("set uart.flow 0 on \r\n", 5);
-	write_wifi_command("set bus.command.rx_bufsize 5000\r\n");
-	write_wifi_command("set sy i g wlan 20\r\n", 5);
-	write_wifi_command("set sy i g network 19\r\n", 5);
-	write_wifi_command("set sy i g softap 21\r\n" ,5);
-	write_wifi_command("set system.cmd.gpio 13\r\n", 5);
-	write_wifi_command("set wl n o 14\r\n", 5);
-	write_wifi_command("save\r\n", 5);
-	write_wifi_command("reboot\r\n", 5);
+	
+	
+	write_wifi_command("set sy c p off\r\n", 2);
+	
 	
 		
 	
@@ -60,7 +67,7 @@ int main (void)
 			write_wifi_command("web setup", 5);
 			delay_ms(100);
 			wifi_setup_button_flag=0;
-			while (ioport_get_pin_level(WIFI_STATUS_PIN)==0) { //wait for network connection
+			while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 				if (wifi_setup_button_flag){
 					write_wifi_command("web setup", 5);
 					delay_ms(100);
@@ -69,16 +76,16 @@ int main (void)
 				
 			}
 		}
-		while(ioport_get_pin_level(WIFI_STATUS_PIN)==0){
+		while(ioport_get_pin_level(WIFI_STATUS)==0){
 			ioport_set_pin_level(WIFI_RESET_PIN, 0);
 			delay_ms(100);
 			ioport_set_pin_level(WIFI_RESET_PIN, 1);
 			delay_ms(500);
 		}
-		write_wifi_command();
-		if(no_open_streams){
+		write_wifi_command("poll all\r\n", 5);
+		if(wait_flag){
 			delay_ms(1000);
-			no_open_streams=0;
+			wait_flag=0;
 		} else {
 			uint8_t get_image = start_capture();
 			write_image_to_file();

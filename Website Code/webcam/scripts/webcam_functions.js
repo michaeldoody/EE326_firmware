@@ -8,6 +8,7 @@ function init() {
 	if(window.location.hostname != "") {
 		localhost = window.location.hostname;
 	}
+    
 
 	doConnect();
 }

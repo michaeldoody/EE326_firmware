@@ -7,6 +7,7 @@
 
 #include <asf.h>
 #include "camera.h"
+#include "ov2640.h"
 
 static volatile uint32_t g_ul_vsync_flag = false;
 
@@ -28,7 +29,7 @@ void init_vsync_interrupts(void)
 	/* Enable PIO controller IRQs */
 	NVIC_EnableIRQ((IRQn_Type)OV2640_VSYNC_ID);
 	
-	pio_enable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK)
+	pio_enable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK);
 }
 
 void configure_twi(void)
@@ -115,7 +116,7 @@ void init_camera(void)
 		
 	/* Init Vsync handler*/
 	init_vsync_interrupts();
-	pio_disable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK)
+	pio_disable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK);
 	vsync_flag = false;
 
 	/* Init PIO capture*/
@@ -210,5 +211,4 @@ uint8_t find_image_len(void){
 		end_of_image = 0;
 		
 		return 0;
-	}
 }
