@@ -10,7 +10,7 @@ function init() {
 	}
     
 
-	doConnect();
+	//doConnect();
 }
 
 function doConnect() { // makes a connection and defines callbacks
@@ -126,3 +126,5 @@ function clickSocket(){
 
 // Open Websocket as soon as page loads
 window.addEventListener("load", init, false);
+
+b.onclick = doConnect();
