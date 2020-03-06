@@ -10,7 +10,7 @@ src/ASF/sam/drivers/usart/usart.d src/ASF/sam/drivers/usart/usart.o: \
  ../src/ASF/sam/utils/preprocessor/preprocessor.h \
  ../src/ASF/sam/utils/header_files/io.h \
  ../src/ASF/sam/utils/cmsis/sam4s/include/sam4s.h \
- ../src/ASF/sam/utils/cmsis/sam4s/include/sam4s2b.h \
+ ../src/ASF/sam/utils/cmsis/sam4s/include/sam4s8b.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_default_types.h \
@@ -77,7 +77,7 @@ src/ASF/sam/drivers/usart/usart.d src/ASF/sam/drivers/usart/usart.o: \
  ../src/ASF/sam/utils/cmsis/sam4s/include/instance/instance_wdt.h \
  ../src/ASF/sam/utils/cmsis/sam4s/include/instance/instance_rtc.h \
  ../src/ASF/sam/utils/cmsis/sam4s/include/instance/instance_gpbr.h \
- ../src/ASF/sam/utils/cmsis/sam4s/include/pio/pio_sam4s2b.h \
+ ../src/ASF/sam/utils/cmsis/sam4s/include/pio/pio_sam4s8b.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
@@ -130,7 +130,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 
 ../src/ASF/sam/utils/cmsis/sam4s/include/sam4s.h:
 
-../src/ASF/sam/utils/cmsis/sam4s/include/sam4s2b.h:
+../src/ASF/sam/utils/cmsis/sam4s/include/sam4s8b.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\6.3.1\include\stdint.h:
 
@@ -264,7 +264,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam/utils/cmsis/sam4s/include/instance/instance_gpbr.h:
 
-../src/ASF/sam/utils/cmsis/sam4s/include/pio/pio_sam4s2b.h:
+../src/ASF/sam/utils/cmsis/sam4s/include/pio/pio_sam4s8b.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 

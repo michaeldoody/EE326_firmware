@@ -39,7 +39,7 @@ function doConnect() { // makes a connection and defines callbacks
 function onOpen(evt) { // when handshake is complete:
 	writeToScreen("Connected.");
 	//*** Change the text of the button to read "Stop Webcam" ***//
-    b.innerText = "Stop Webcam:";
+    b.innerText = "Stop Webcam";
 
 	//*** Change the title attribute of the button to display "Click to stop webcam" ***//
     b.title = "Click to stop webcam";
@@ -107,7 +107,7 @@ function onError(evt) { // when an error occurs
 b.addEventListener("click", clickSocket);
 
 function clickSocket(){
-    b.disable = true;
+    b.disabled = true;
     buttonClicked = true;
     if (b.innerText == "Start Webcam"){
         doConnect();
