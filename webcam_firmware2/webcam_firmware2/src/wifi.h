@@ -68,9 +68,9 @@ void process_data_wifi();
 volatile char input_line_wifi[1000];
 volatile uint32_t received_byte_wifi;
 volatile unsigned int input_pos_wifi;
-volatile uint32_t wifi_setup_button_flag = false;
-volatile uint32_t wifi_comm_success = false;
-volatile uint32_t image_length = 0;
+volatile uint32_t wifi_setup_button_flag;
+volatile uint32_t wifi_comm_success;
+volatile uint32_t image_length;
 volatile uint32_t start_image_transfer;
 volatile uint32_t wait_flag;
 
