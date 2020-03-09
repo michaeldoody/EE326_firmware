@@ -6,6 +6,8 @@ src\ASF\common\services\clock\sam4s\sysclk.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 
+src\ASF\common\services\serial\usart_serial.c
+
 src\ASF\sam\drivers\pio\pio.c
 
 src\ASF\sam\drivers\pio\pio_handler.c
@@ -17,6 +19,8 @@ src\ASF\sam\drivers\pmc\sleep.c
 src\ASF\sam\drivers\tc\tc.c
 
 src\ASF\sam\drivers\twi\twi.c
+
+src\ASF\sam\drivers\uart\uart.c
 
 src\ASF\sam\drivers\usart\usart.c
 

@@ -9,6 +9,8 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
+#include <asf.h>
+
 #define OV2640_VSYNC_PIO			PIOA
 #define OV2640_VSYNC_ID				ID_PIOA
 #define OV2640_VSYNC_MASK			PIO_PA15
@@ -50,7 +52,8 @@
 #define OV_DATA_BUS_TYPE			PIO_INPUT
 #define OV_DATA_BUS_ATTR			PIO_DEFAULT
 
-
+#define PIN_PCK1                       (PIO_PA17_IDX)
+#define PIN_PCK1_FLAGS                 (PIO_PERIPH_B | PIO_DEFAULT)
 
 #define CAP_DEST					(0x60000000UL)
 

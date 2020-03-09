@@ -51,11 +51,11 @@ li a:last-child{
 }
 #btnWS {
     margin-top: 90px;
+    padding:20px;
     text-align: center;
     position: absolute;
     left: 80%; 
     top:30%;
-    z-index: -1;
 }
 #image {
     display:block;

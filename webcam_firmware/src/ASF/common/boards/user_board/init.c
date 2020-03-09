@@ -10,6 +10,7 @@
 #include "conf_board.h"
 #include "gpio.h"
 #include "ioport.h"
+#include "wifi.h"
 
 void board_init(void)
 {
@@ -20,4 +21,6 @@ void board_init(void)
 	
 	ioport_set_pin_dir(WIFI_CTS_PIN, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_level(WIFI_CTS_PIN, false);
+	
+	ioport_set_pin_dir(WIFI_STATUS, IOPORT_DIR_INPUT);
 }
