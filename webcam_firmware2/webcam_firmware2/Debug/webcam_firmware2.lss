@@ -7315,7 +7315,7 @@ void board_init(void)
 	
 	ioport_set_pin_dir(WIFI_STATUS, IOPORT_DIR_INPUT);
   402a44:	2100      	movs	r1, #0
-  402a46:	202e      	movs	r0, #46	; 0x2e
+  402a46:	200a      	movs	r0, #10
   402a48:	4b02      	ldr	r3, [pc, #8]	; (402a54 <board_init+0x58>)
   402a4a:	4798      	blx	r3
 	/* This function is meant to contain board-specific initialization code
@@ -8263,7 +8263,7 @@ int main (void)
   40301c:	2300      	movs	r3, #0
   40301e:	6013      	str	r3, [r2, #0]
 	while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
-  403020:	202e      	movs	r0, #46	; 0x2e
+  403020:	200a      	movs	r0, #10
   403022:	4b6a      	ldr	r3, [pc, #424]	; (4031cc <main+0x2c0>)
   403024:	4798      	blx	r3
   403026:	4603      	mov	r3, r0
@@ -8431,7 +8431,7 @@ int main (void)
   40316c:	2300      	movs	r3, #0
   40316e:	6013      	str	r3, [r2, #0]
 			while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
-  403170:	202e      	movs	r0, #46	; 0x2e
+  403170:	200a      	movs	r0, #10
   403172:	4b16      	ldr	r3, [pc, #88]	; (4031cc <main+0x2c0>)
   403174:	4798      	blx	r3
   403176:	4603      	mov	r3, r0
@@ -8578,7 +8578,7 @@ int main (void)
   4032ec:	4b33      	ldr	r3, [pc, #204]	; (4033bc <main+0x4b0>)
   4032ee:	4798      	blx	r3
 		while(ioport_get_pin_level(WIFI_STATUS)==0){
-  4032f0:	202e      	movs	r0, #46	; 0x2e
+  4032f0:	200a      	movs	r0, #10
   4032f2:	4b33      	ldr	r3, [pc, #204]	; (4033c0 <main+0x4b4>)
   4032f4:	4798      	blx	r3
   4032f6:	4603      	mov	r3, r0

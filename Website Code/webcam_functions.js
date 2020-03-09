@@ -16,7 +16,7 @@ function init() {
 function doConnect() { // makes a connection and defines callbacks
 	if (b.innerText == "Start Webcam") {
 		writeToScreen("Connecting to ws://" + localhost + "/stream ...");
-		//b.disabled = true;
+		b.disabled = false;
 		websocket = new WebSocket("ws://" + localhost + "/stream");
 		websocket.onopen = function(evt) {
 			onOpen(evt)
@@ -107,6 +107,7 @@ function onError(evt) { // when an error occurs
 b.addEventListener("click", clickSocket);
 
 function clickSocket(){
+    document.getElementById('timestamp').innerText = Date();
     b.disabled = true;
     buttonClicked = true;
     if (b.innerText == "Start Webcam"){
