@@ -9,12 +9,17 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
-#define OV2640_VSYNC_PIO			PIOA
+#define PIN_PCK1					PIO_PA17_IDX
+#define PIN_PCK1_FLAGS				(PIO_PERIPH_B | PIO_DEFAULT)
+
+#define OV_VSYNC_GPIO				PIO_PA15_IDX
+#define OV_VSYNC_FLAGS				(PIO_PULLUP | PIO_IT_RISE_EDGE)
+
+#define OV_POWER_PIO				PIOC
 #define OV2640_VSYNC_ID				ID_PIOA
 #define OV2640_VSYNC_MASK			PIO_PA15
 #define OV2640_VSYNC_TYPE			PIO_PULLUP
-#define OV_POWER_PIO				PIOC
-#define OV_VSYNC_MASK				PIO_PA15_IDX
+#define OV2640_VSYNC_PIO			PIOA
 
 
 #define OV_RST_GPIO                 PIO_PA20_IDX
@@ -32,6 +37,12 @@
 #define OV_HSYNC_ID                 ID_PIOA
 #define OV_HSYNC_TYPE				PIO_PULLUP
 
+#define OV_FSIN_GPIO                   PIO_PA21_IDX
+#define OV_FSIN_FLAGS                  (PIO_OUTPUT_0 | PIO_DEFAULT)
+#define OV_FSIN_MASK                   PIO_PA21
+#define OV_FSIN_PIO                    PIOA
+#define OV_FSIN_ID                     ID_PIOA
+#define OV_FSIN_TYPE                   PIO_OUTPUT_0
 
 
 /** OV Data Bus pins */
@@ -51,6 +62,24 @@
 #define OV_DATA_BUS_ATTR			PIO_DEFAULT
 
 
+#define TWI0_DATA_GPIO                 PIO_PA3_IDX
+#define TWI0_DATA_FLAGS                (PIO_PERIPH_A | PIO_DEFAULT)
+#define TWI0_DATA_MASK                 PIO_PA3
+#define TWI0_DATA_PIO                  PIOA
+#define TWI0_DATA_ID                   ID_PIOA
+#define TWI0_DATA_TYPE                 PIO_PERIPH_A
+#define TWI0_DATA_ATTR                 PIO_DEFAULT
+
+
+#define TWI0_CLK_GPIO                  PIO_PA4_IDX
+#define TWI0_CLK_FLAGS                 (PIO_PERIPH_A | PIO_DEFAULT)
+#define TWI0_CLK_MASK                  PIO_PA4
+#define TWI0_CLK_PIO                   PIOA
+#define TWI0_CLK_ID                    ID_PIOA
+#define TWI0_CLK_TYPE                  PIO_PERIPH_A
+#define TWI0_CLK_ATTR                  PIO_DEFAULT
+
+
 
 #define CAP_DEST					(0x60000000UL)
 
@@ -62,6 +91,7 @@
 
 #define IMAGE_MAX				50000
 uint8_t image_buffer[IMAGE_MAX];
+
 
 volatile uint32_t start_of_image;
 volatile uint32_t end_of_image;

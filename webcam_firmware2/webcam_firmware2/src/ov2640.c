@@ -399,7 +399,7 @@ uint32_t ov_init(Twi* const p_twi)
 			}
 		}
 	}
-
+	
 	return 1;
 }
 

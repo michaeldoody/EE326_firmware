@@ -50,6 +50,9 @@ void configure_twi(void)
 	NVIC_SetPriority(BOARD_TWI_IRQn, 0);
 	NVIC_EnableIRQ(BOARD_TWI_IRQn);
 	
+	gpio_configure_pin(TWI0_DATA_GPIO, TWI0_DATA_FLAGS);
+	gpio_configure_pin(TWI0_CLK_GPIO, TWI0_CLK_FLAGS);
+	
 }
 
 
@@ -98,9 +101,29 @@ uint32_t ul_size)
 
 void init_camera(void)
 {
+	
+	pmc_enable_pllbck(7, 0x1, 1);
+	
+	pio_capture_init(OV_DATA_BUS_PIO, OV_DATA_BUS_ID);
+	
+	init_vsync_interrupts();
+	
+	/* Init PCK1 to work at 24 Mhz */
+	/* 96/4=24 Mhz */
+	PMC->PMC_PCK[0] = (PMC_PCK_PRES_CLK_4 | PMC_PCK_CSS_PLLB_CLK);
+	PMC->PMC_SCER = PMC_SCER_PCK0;
+	while (!(PMC->PMC_SCSR & PMC_SCSR_PCK0)) {
+	}
+	
+	configure_twi();	
+	
+	gpio_configure_pin(PIN_PCK1, PIN_PCK1_FLAGS);
+	
+	
 	gpio_configure_pin(OV_RST_GPIO, OV_RST_FLAGS);
 	gpio_configure_pin(OV_HSYNC_GPIO, OV_HSYNC_FLAGS);
-	gpio_configure_pin(OV_VSYNC_MASK, OV2640_VSYNC_TYPE);
+	gpio_configure_pin(OV_VSYNC_GPIO, OV_VSYNC_FLAGS);
+	
 	gpio_configure_pin(OV_DATA_BUS_D0, OV_DATA_BUS_FLAGS);
 	gpio_configure_pin(OV_DATA_BUS_D1, OV_DATA_BUS_FLAGS);
 	gpio_configure_pin(OV_DATA_BUS_D2, OV_DATA_BUS_FLAGS);
@@ -110,29 +133,16 @@ void init_camera(void)
 	gpio_configure_pin(OV_DATA_BUS_D6, OV_DATA_BUS_FLAGS);
 	gpio_configure_pin(OV_DATA_BUS_D7, OV_DATA_BUS_FLAGS);
 	
-	pmc_enable_pllbck(7, 0x1, 1);
+	
 	
 	
 		
 	/* Init Vsync handler*/
-	init_vsync_interrupts();
-	pio_disable_interrupt(OV2640_VSYNC_PIO, OV2640_VSYNC_MASK);
-	vsync_flag = false;
+
 
 	/* Init PIO capture*/
-	pio_capture_init(OV_DATA_BUS_PIO, OV_DATA_BUS_ID);
 
 
-
-	/* Init PCK1 to work at 24 Mhz */
-	/* 96/4=24 Mhz */
-	PMC->PMC_PCK[0] = (PMC_PCK_PRES_CLK_4 | PMC_PCK_CSS_PLLB_CLK);
-	PMC->PMC_SCER = PMC_SCER_PCK0;
-	while (!(PMC->PMC_SCSR & PMC_SCSR_PCK0)) {
-	}
-	
-	configure_twi();
-	
 }
 
 void configure_camera(void)
@@ -142,7 +152,7 @@ void configure_camera(void)
 	}
 
 	/* ov7740 configuration */
-	ov_configure(BOARD_TWI,JPEG_INIT);
+	ov_configure(BOARD_TWI, JPEG_INIT);
 	ov_configure(BOARD_TWI, YUV422);
 	ov_configure(BOARD_TWI, JPEG);
 	ov_configure(BOARD_TWI, JPEG_640x480);
@@ -175,6 +185,7 @@ uint8_t start_capture(void)
 	pio_capture_to_buffer(OV_DATA_BUS_PIO, image_buffer,
 			IMAGE_MAX >> 2);
 
+
 	/* Wait end of capture*/
 	while (!((OV_DATA_BUS_PIO->PIO_PCISR & PIO_PCIMR_RXBUFF) ==
 			PIO_PCIMR_RXBUFF)) {
@@ -182,6 +193,10 @@ uint8_t start_capture(void)
 
 	/* Disable pio capture*/
 	pio_capture_disable(OV_DATA_BUS_PIO);
+	
+				
+				
+	vsync_flag = false;
 
 	/* Reset vsync flag*/
 	g_ul_vsync_flag = false;

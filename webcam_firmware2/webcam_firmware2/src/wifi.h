@@ -11,6 +11,7 @@
 #include <asf.h>
 #include <string.h>
 
+
 #define BOARD_ID_USART             ID_USART0
 #define WIFI_USART				   USART0
 #define BOARD_USART_BAUDRATE       115200
@@ -46,7 +47,7 @@
 #define WEB_SETUP_BUTTON_PIN_MSK       PIO_PA22
 #define WEB_SETUP_BUTTON_ATTR          PIO_IT_RISE_EDGE
 
-#define WIFI_RESET_PIN					PIO_PB0_IDX
+#define WIFI_RESET_PIN					PIO_PA0_IDX
 #define WIFI_STATUS						PIO_PB14_IDX					
 #define RESET_CAMERA_PIN				PIO_PA20_IDX
 #define IMAGE_WIDTH                    (320UL)

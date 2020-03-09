@@ -30,15 +30,15 @@ int main (void)
 	configure_camera();
 
 
-	write_wifi_command("set uart.flow 0 on \r\n", 5);
-	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 5);
-	write_wifi_command("set sy i g wlan 20\r\n", 5);
-	write_wifi_command("set sy i g network 19\r\n", 5);
-	write_wifi_command("set sy i g softap 21\r\n" ,5);
-	write_wifi_command("set system.cmd.gpio 13\r\n", 5);
-	write_wifi_command("set wl n o 14\r\n", 5);
-	write_wifi_command("save\r\n", 5);
-	write_wifi_command("reboot\r\n", 5);
+	write_wifi_command("set uart.flow 0 on \r\n", 2);
+	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 2);
+	write_wifi_command("set sy i g wlan 20\r\n", 2);
+	write_wifi_command("set sy i g network 19\r\n", 2);
+	write_wifi_command("set sy i g softap 21\r\n" ,2);
+	write_wifi_command("set system.cmd.gpio 13\r\n", 2);
+	write_wifi_command("set wl n o 14\r\n", 2);
+	write_wifi_command("save\r\n", 2);
+	write_wifi_command("reboot\r\n", 2s);
 	
 	while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 		if (wifi_setup_button_flag){
@@ -64,12 +64,12 @@ int main (void)
 
 	while(1) {
 		if(wifi_setup_button_flag){
-			write_wifi_command("web setup", 5);
+			write_wifi_command("setup web\r\n", 5);
 			delay_ms(100);
 			wifi_setup_button_flag=0;
 			while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 				if (wifi_setup_button_flag){
-					write_wifi_command("web setup", 5);
+					write_wifi_command("setup web\r\n", 5);
 					delay_ms(100);
 					wifi_setup_button_flag = 0;
 				}
