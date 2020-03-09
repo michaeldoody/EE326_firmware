@@ -28,17 +28,8 @@ int main (void)
 	//Initialize and configure the camera
 	init_camera();
 	configure_camera();
-
-
-	write_wifi_command("set uart.flow 0 on \r\n", 2);
-	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 2);
-	write_wifi_command("set sy i g wlan 20\r\n", 2);
-	write_wifi_command("set sy i g network 19\r\n", 2);
-	write_wifi_command("set sy i g softap 21\r\n" ,2);
-	write_wifi_command("set system.cmd.gpio 13\r\n", 2);
-	write_wifi_command("set wl n o 14\r\n", 2);
-	write_wifi_command("save\r\n", 2);
-	write_wifi_command("reboot\r\n", 2s);
+	
+	write_wifi_command("set sy c p off\r\n", 2);
 	
 	while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 		if (wifi_setup_button_flag){
@@ -48,13 +39,23 @@ int main (void)
 		}
 		
 	}
+
+	write_wifi_command("set uart.flow 0 on \r\n", 2);
+	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 2);
+	write_wifi_command("set sy i g wlan 20\r\n", 2);
+	write_wifi_command("set sy i g network 19\r\n", 2);
+	write_wifi_command("set sy i g softap 21\r\n" ,2);
+	write_wifi_command("set system.cmd.gpio 13\r\n", 2);
+	write_wifi_command("set wl n o 14\r\n", 2);
+	write_wifi_command("save\r\n", 2);
+	write_wifi_command("reboot\r\n", 2);
+	
+
 	
 
 	// tell wifi to turn off command prompt and echo
 	
-	
-	
-	write_wifi_command("set sy c p off\r\n", 2);
+
 	
 	
 	
