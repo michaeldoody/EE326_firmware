@@ -1,4 +1,4 @@
-/**
+dms /**
  * \file
  *
  * \brief Generic clock management

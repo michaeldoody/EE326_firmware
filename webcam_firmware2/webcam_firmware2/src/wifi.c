@@ -11,9 +11,10 @@
 
 volatile uint32_t received_byte_wifi = 0;
 volatile unsigned int input_pos_wifi = 0;
-volatile uint32_t wifi_setup_button_flag;
+volatile uint32_t wifi_setup_button_flag=false;
 volatile uint32_t counts = 0;
-volatile uint32_t image_length;
+volatile uint32_t wifi_comm_success=false;
+volatile uint32_t image_length=0;
 volatile uint32_t start_image_transfer = 0;
 volatile uint32_t wait_flag = 0;
 
