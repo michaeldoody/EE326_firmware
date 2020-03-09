@@ -35,9 +35,15 @@
           <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.twi" value="Add" config="" content-id="Atmel.ASF" />
+<<<<<<< HEAD
           <option id="sam.drivers.tc.appnote" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.serial" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.wdt" value="Add" config="" content-id="Atmel.ASF" />
+=======
+          <option id="sam.drivers.usart" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam.drivers.wdt" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam.drivers.tc.appnote" value="Add" config="" content-id="Atmel.ASF" />
+>>>>>>> a6597142ddc12b9e54832cb27bbdfec5f45fbb07
           <option id="sam.utils.linker_scripts#atsam4s2" value="Add" config="" content-id="Atmel.ASF" />
         </options>
         <configurations>
@@ -213,12 +219,15 @@
           <file path="src/ASF/sam/drivers/tc/tc.c" framework="" version="3.47.0" source="sam\drivers\tc\tc.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam/drivers/tc/tc.h" framework="" version="3.47.0" source="sam\drivers\tc\tc.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam/drivers/tc/tc_capture_waveform_example/tc_capture_waveform_example.h" framework="" version="3.47.0" source="sam\drivers\tc\tc_capture_waveform_example\tc_capture_waveform_example.h" changed="False" content-id="Atmel.ASF" />
+<<<<<<< HEAD
           <file path="src/ASF/sam/drivers/uart/uart.c" framework="" version="3.47.0" source="sam\drivers\uart\uart.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam/drivers/uart/uart.h" framework="" version="3.47.0" source="sam\drivers\uart\uart.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/serial/usart_serial.c" framework="" version="3.47.0" source="common\services\serial\usart_serial.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/serial/sam_uart/uart_serial.h" framework="" version="3.47.0" source="common\services\serial\sam_uart\uart_serial.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/serial/serial.h" framework="" version="3.47.0" source="common\services\serial\serial.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/Config/conf_uart_serial.h" framework="" version="3.47.0" source="common\services\serial\sam_uart\module_config\conf_uart_serial.h" changed="False" content-id="Atmel.ASF" />
+=======
+>>>>>>> a6597142ddc12b9e54832cb27bbdfec5f45fbb07
         </files>
         <documentation help="http://asf.atmel.com/docs/3.47.0/common.applications.user_application.user_board.sam4s/html/index.html" />
         <offline-documentation help="" />
