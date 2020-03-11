@@ -4783,32 +4783,32 @@ void init_camera(void)
   401a96:	4b26      	ldr	r3, [pc, #152]	; (401b30 <init_camera+0xb0>)
   401a98:	4798      	blx	r3
 	
+	gpio_configure_pin(PIN_PCK1, PIN_PCK1_FLAGS);
+  401a9a:	f04f 5180 	mov.w	r1, #268435456	; 0x10000000
+  401a9e:	2011      	movs	r0, #17
+  401aa0:	4b24      	ldr	r3, [pc, #144]	; (401b34 <init_camera+0xb4>)
+  401aa2:	4798      	blx	r3
+	
 	/* Init PCK1 to work at 24 Mhz */
 	/* 96/4=24 Mhz */
-	PMC->PMC_PCK[0] = (PMC_PCK_PRES_CLK_4 | PMC_PCK_CSS_PLLB_CLK);
-  401a9a:	4b26      	ldr	r3, [pc, #152]	; (401b34 <init_camera+0xb4>)
-  401a9c:	2223      	movs	r2, #35	; 0x23
-  401a9e:	641a      	str	r2, [r3, #64]	; 0x40
-	PMC->PMC_SCER = PMC_SCER_PCK0;
-  401aa0:	4b24      	ldr	r3, [pc, #144]	; (401b34 <init_camera+0xb4>)
-  401aa2:	f44f 7280 	mov.w	r2, #256	; 0x100
-  401aa6:	601a      	str	r2, [r3, #0]
-	while (!(PMC->PMC_SCSR & PMC_SCSR_PCK0)) {
-  401aa8:	bf00      	nop
-  401aaa:	4b22      	ldr	r3, [pc, #136]	; (401b34 <init_camera+0xb4>)
-  401aac:	689b      	ldr	r3, [r3, #8]
-  401aae:	f403 7380 	and.w	r3, r3, #256	; 0x100
-  401ab2:	2b00      	cmp	r3, #0
-  401ab4:	d0f9      	beq.n	401aaa <init_camera+0x2a>
+	PMC->PMC_PCK[1] = (PMC_PCK_PRES_CLK_4 | PMC_PCK_CSS_PLLB_CLK);
+  401aa4:	4b24      	ldr	r3, [pc, #144]	; (401b38 <init_camera+0xb8>)
+  401aa6:	2223      	movs	r2, #35	; 0x23
+  401aa8:	645a      	str	r2, [r3, #68]	; 0x44
+	PMC->PMC_SCER = PMC_SCER_PCK1;
+  401aaa:	4b23      	ldr	r3, [pc, #140]	; (401b38 <init_camera+0xb8>)
+  401aac:	f44f 7200 	mov.w	r2, #512	; 0x200
+  401ab0:	601a      	str	r2, [r3, #0]
+	while (!(PMC->PMC_SCSR & PMC_SCSR_PCK1)) {
+  401ab2:	bf00      	nop
+  401ab4:	4b20      	ldr	r3, [pc, #128]	; (401b38 <init_camera+0xb8>)
+  401ab6:	689b      	ldr	r3, [r3, #8]
+  401ab8:	f403 7300 	and.w	r3, r3, #512	; 0x200
+  401abc:	2b00      	cmp	r3, #0
+  401abe:	d0f9      	beq.n	401ab4 <init_camera+0x34>
 	}
 	
 	configure_twi();	
-  401ab6:	4b20      	ldr	r3, [pc, #128]	; (401b38 <init_camera+0xb8>)
-  401ab8:	4798      	blx	r3
-	
-	gpio_configure_pin(PIN_PCK1, PIN_PCK1_FLAGS);
-  401aba:	f04f 5180 	mov.w	r1, #268435456	; 0x10000000
-  401abe:	2011      	movs	r0, #17
   401ac0:	4b1e      	ldr	r3, [pc, #120]	; (401b3c <init_camera+0xbc>)
   401ac2:	4798      	blx	r3
 	
@@ -4816,58 +4816,58 @@ void init_camera(void)
 	gpio_configure_pin(OV_RST_GPIO, OV_RST_FLAGS);
   401ac4:	f04f 5160 	mov.w	r1, #939524096	; 0x38000000
   401ac8:	2014      	movs	r0, #20
-  401aca:	4b1c      	ldr	r3, [pc, #112]	; (401b3c <init_camera+0xbc>)
+  401aca:	4b1a      	ldr	r3, [pc, #104]	; (401b34 <init_camera+0xb4>)
   401acc:	4798      	blx	r3
 	gpio_configure_pin(OV_HSYNC_GPIO, OV_HSYNC_FLAGS);
   401ace:	2171      	movs	r1, #113	; 0x71
   401ad0:	2010      	movs	r0, #16
-  401ad2:	4b1a      	ldr	r3, [pc, #104]	; (401b3c <init_camera+0xbc>)
+  401ad2:	4b18      	ldr	r3, [pc, #96]	; (401b34 <init_camera+0xb4>)
   401ad4:	4798      	blx	r3
 	gpio_configure_pin(OV_VSYNC_GPIO, OV_VSYNC_FLAGS);
   401ad6:	2171      	movs	r1, #113	; 0x71
   401ad8:	200f      	movs	r0, #15
-  401ada:	4b18      	ldr	r3, [pc, #96]	; (401b3c <init_camera+0xbc>)
+  401ada:	4b16      	ldr	r3, [pc, #88]	; (401b34 <init_camera+0xb4>)
   401adc:	4798      	blx	r3
 	
 	gpio_configure_pin(OV_DATA_BUS_D0, OV_DATA_BUS_FLAGS);
   401ade:	4918      	ldr	r1, [pc, #96]	; (401b40 <init_camera+0xc0>)
   401ae0:	2018      	movs	r0, #24
-  401ae2:	4b16      	ldr	r3, [pc, #88]	; (401b3c <init_camera+0xbc>)
+  401ae2:	4b14      	ldr	r3, [pc, #80]	; (401b34 <init_camera+0xb4>)
   401ae4:	4798      	blx	r3
 	gpio_configure_pin(OV_DATA_BUS_D1, OV_DATA_BUS_FLAGS);
   401ae6:	4916      	ldr	r1, [pc, #88]	; (401b40 <init_camera+0xc0>)
   401ae8:	2019      	movs	r0, #25
-  401aea:	4b14      	ldr	r3, [pc, #80]	; (401b3c <init_camera+0xbc>)
+  401aea:	4b12      	ldr	r3, [pc, #72]	; (401b34 <init_camera+0xb4>)
   401aec:	4798      	blx	r3
 	gpio_configure_pin(OV_DATA_BUS_D2, OV_DATA_BUS_FLAGS);
   401aee:	4914      	ldr	r1, [pc, #80]	; (401b40 <init_camera+0xc0>)
   401af0:	201a      	movs	r0, #26
-  401af2:	4b12      	ldr	r3, [pc, #72]	; (401b3c <init_camera+0xbc>)
+  401af2:	4b10      	ldr	r3, [pc, #64]	; (401b34 <init_camera+0xb4>)
   401af4:	4798      	blx	r3
 	gpio_configure_pin(OV_DATA_BUS_D3, OV_DATA_BUS_FLAGS);
   401af6:	4912      	ldr	r1, [pc, #72]	; (401b40 <init_camera+0xc0>)
   401af8:	201b      	movs	r0, #27
-  401afa:	4b10      	ldr	r3, [pc, #64]	; (401b3c <init_camera+0xbc>)
+  401afa:	4b0e      	ldr	r3, [pc, #56]	; (401b34 <init_camera+0xb4>)
   401afc:	4798      	blx	r3
 	gpio_configure_pin(OV_DATA_BUS_D4, OV_DATA_BUS_FLAGS);
   401afe:	4910      	ldr	r1, [pc, #64]	; (401b40 <init_camera+0xc0>)
   401b00:	201c      	movs	r0, #28
-  401b02:	4b0e      	ldr	r3, [pc, #56]	; (401b3c <init_camera+0xbc>)
+  401b02:	4b0c      	ldr	r3, [pc, #48]	; (401b34 <init_camera+0xb4>)
   401b04:	4798      	blx	r3
 	gpio_configure_pin(OV_DATA_BUS_D5, OV_DATA_BUS_FLAGS);
   401b06:	490e      	ldr	r1, [pc, #56]	; (401b40 <init_camera+0xc0>)
   401b08:	201d      	movs	r0, #29
-  401b0a:	4b0c      	ldr	r3, [pc, #48]	; (401b3c <init_camera+0xbc>)
+  401b0a:	4b0a      	ldr	r3, [pc, #40]	; (401b34 <init_camera+0xb4>)
   401b0c:	4798      	blx	r3
 	gpio_configure_pin(OV_DATA_BUS_D6, OV_DATA_BUS_FLAGS);
   401b0e:	490c      	ldr	r1, [pc, #48]	; (401b40 <init_camera+0xc0>)
   401b10:	201e      	movs	r0, #30
-  401b12:	4b0a      	ldr	r3, [pc, #40]	; (401b3c <init_camera+0xbc>)
+  401b12:	4b08      	ldr	r3, [pc, #32]	; (401b34 <init_camera+0xb4>)
   401b14:	4798      	blx	r3
 	gpio_configure_pin(OV_DATA_BUS_D7, OV_DATA_BUS_FLAGS);
   401b16:	490a      	ldr	r1, [pc, #40]	; (401b40 <init_camera+0xc0>)
   401b18:	201f      	movs	r0, #31
-  401b1a:	4b08      	ldr	r3, [pc, #32]	; (401b3c <init_camera+0xbc>)
+  401b1a:	4b06      	ldr	r3, [pc, #24]	; (401b34 <init_camera+0xb4>)
   401b1c:	4798      	blx	r3
 
 
@@ -4882,9 +4882,9 @@ void init_camera(void)
   401b28:	400e0e00 	.word	0x400e0e00
   401b2c:	0040199d 	.word	0x0040199d
   401b30:	004018d9 	.word	0x004018d9
-  401b34:	400e0400 	.word	0x400e0400
-  401b38:	0040191d 	.word	0x0040191d
-  401b3c:	004007b1 	.word	0x004007b1
+  401b34:	004007b1 	.word	0x004007b1
+  401b38:	400e0400 	.word	0x400e0400
+  401b3c:	0040191d 	.word	0x0040191d
   401b40:	28000001 	.word	0x28000001
 
 00401b44 <configure_camera>:
@@ -7307,8 +7307,8 @@ void board_init(void)
   402a36:	2014      	movs	r0, #20
   402a38:	4b06      	ldr	r3, [pc, #24]	; (402a54 <board_init+0x58>)
   402a3a:	4798      	blx	r3
-	ioport_set_pin_dir(CAM_RST, true);
-  402a3c:	2101      	movs	r1, #1
+	ioport_set_pin_dir(CAM_RST, false);
+  402a3c:	2100      	movs	r1, #0
   402a3e:	2014      	movs	r0, #20
   402a40:	4b04      	ldr	r3, [pc, #16]	; (402a54 <board_init+0x58>)
   402a42:	4798      	blx	r3

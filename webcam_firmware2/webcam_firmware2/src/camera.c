@@ -108,16 +108,16 @@ void init_camera(void)
 	
 	init_vsync_interrupts();
 	
+	gpio_configure_pin(PIN_PCK1, PIN_PCK1_FLAGS);
+	
 	/* Init PCK1 to work at 24 Mhz */
 	/* 96/4=24 Mhz */
-	PMC->PMC_PCK[0] = (PMC_PCK_PRES_CLK_4 | PMC_PCK_CSS_PLLB_CLK);
-	PMC->PMC_SCER = PMC_SCER_PCK0;
-	while (!(PMC->PMC_SCSR & PMC_SCSR_PCK0)) {
+	PMC->PMC_PCK[1] = (PMC_PCK_PRES_CLK_4 | PMC_PCK_CSS_PLLB_CLK);
+	PMC->PMC_SCER = PMC_SCER_PCK1;
+	while (!(PMC->PMC_SCSR & PMC_SCSR_PCK1)) {
 	}
 	
 	configure_twi();	
-	
-	gpio_configure_pin(PIN_PCK1, PIN_PCK1_FLAGS);
 	
 	
 	gpio_configure_pin(OV_RST_GPIO, OV_RST_FLAGS);

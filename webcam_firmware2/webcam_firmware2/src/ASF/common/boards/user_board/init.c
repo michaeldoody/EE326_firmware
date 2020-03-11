@@ -28,7 +28,7 @@ void board_init(void)
 	ioport_set_pin_level(WIFI_CTS_PIN, false);
 	
 	ioport_set_pin_dir(CAM_RST, IOPORT_DIR_OUTPUT);
-	ioport_set_pin_dir(CAM_RST, true);
+	ioport_set_pin_dir(CAM_RST, false);
 	
 	ioport_set_pin_dir(WIFI_STATUS, IOPORT_DIR_INPUT);
 	/* This function is meant to contain board-specific initialization code
