@@ -54,9 +54,9 @@ void wifi_web_setup_handler(uint32_t ul_id, uint32_t ul_mask)
 
 void configure_usart_wifi(void)
 {
-	gpio_configure_pin(PIN_USART1_RXD_IDX, PIN_USART1_RXD_FLAGS);
-	gpio_configure_pin(PIN_USART1_TXD_IDX, PIN_USART1_TXD_FLAGS);
-	gpio_configure_pin(PIN_USART1_CTS_IDX, PIN_USART1_CTS_FLAGS);
+	gpio_configure_pin(PIN_USART0_RXD_IDX, PIN_USART0_RXD_FLAGS);
+	gpio_configure_pin(PIN_USART0_TXD_IDX, PIN_USART0_TXD_FLAGS);
+	gpio_configure_pin(PIN_USART0_CTS_IDX, PIN_USART0_CTS_FLAGS);
 	//gpio_configure_pin(PIN_USART1_RTS_IDX, PIN_USART1_RTS_FLAGS);
 
 	static uint32_t ul_sysclk;
@@ -146,6 +146,7 @@ void write_wifi_command(char* comm, uint8_t cnt)
 			wifi_comm_success = false;
 			return;
 		}
+		
 	}
 	return;
 }
@@ -161,6 +162,7 @@ void write_image_to_file(void)
 	char string[50] = {0};
 	sprintf(string,"image_transfer %d\r\n", image_length);
 	write_wifi_command(string, 20);
+	delay_ms(100);
 	
 	while(!wifi_comm_success)
 	{
