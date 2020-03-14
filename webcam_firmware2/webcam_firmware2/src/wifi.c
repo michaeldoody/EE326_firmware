@@ -36,11 +36,11 @@ static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask)
 {
 	unused(ul_id);
 	unused(ul_mask);
-	
-	wifi_comm_success = true;
-
 	process_data_wifi();
-	for (int jj = 0;jj<1000;jj++) input_line_wifi[jj] = 0;
+	wifi_comm_success = true;
+	for (int jj = 0;jj<1000;jj++) {
+		 input_line_wifi[jj] = 0;
+	}
 	input_pos_wifi = 0;
 }
 
@@ -164,10 +164,10 @@ void write_image_to_file(void)
 	write_wifi_command(string, 20);
 	delay_ms(100);
 	
-	while(!wifi_comm_success)
-	{
-		
-	}
+// 	while(!wifi_comm_success)
+// 	{
+// 		
+// 	}
 	
 	uint32_t img = start_of_image;
 	while (img < end_of_image)
@@ -183,7 +183,8 @@ void write_image_to_file(void)
 
 void process_incoming_byte_wifi(uint8_t in_byte) {
 	
-	input_line_wifi[input_pos_wifi++ ] = in_byte;
+	input_line_wifi[input_pos_wifi] = in_byte;
+	input_pos_wifi++;
 }
 
 void process_data_wifi(void) {
