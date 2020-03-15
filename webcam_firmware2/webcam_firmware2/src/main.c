@@ -21,15 +21,18 @@ int main (void)
 	configure_wifi_web_setup_pin();
 	
 	//Reset wiFi module
-	ioport_set_pin_level(WIFI_RESET_PIN, 0);
-	delay_ms(100);
-	ioport_set_pin_level(WIFI_RESET_PIN, 1);
+
 	
 	//Initialize and configure the camera
 	init_camera();
 	configure_camera();
 	
+	ioport_set_pin_level(WIFI_RESET_PIN, 0);
+	delay_ms(100);
+	ioport_set_pin_level(WIFI_RESET_PIN, 1);
+		
 	write_wifi_command("set sy c p off\r\n", 2);
+	write_wifi_command("Set sy c e on\r\n", 2);
 	
 	while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 		if (wifi_setup_button_flag){
@@ -51,15 +54,9 @@ int main (void)
 	write_wifi_command("reboot\r\n", 2);
 	
 
-	
+
 
 	// tell wifi to turn off command prompt and echo
-	
-
-	
-	
-	
-	
 	
 	// tell Wifi to turn off command prompt and echo
 
@@ -84,13 +81,15 @@ int main (void)
 			delay_ms(500);
 		}
 		write_wifi_command("poll all\r\n", 5);
-		if(wait_flag){
-			delay_ms(1000);
-			wait_flag=0;
-			} else {
-			uint8_t get_image = start_capture();
-			write_image_to_file();
-		}
+		while(1) {
+			if(wait_flag){
+				delay_ms(1000);
+				wait_flag=0;
+				} else{
+					uint8_t get_image = start_capture();
+					write_image_to_file();
+				}
+			}
 		
 		
 	}
