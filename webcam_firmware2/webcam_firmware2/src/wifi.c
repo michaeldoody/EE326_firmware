@@ -146,6 +146,9 @@ void write_wifi_command(char* comm, uint8_t cnt)
 			wifi_comm_success = false;
 			return;
 		}
+		else{
+			counts++;
+		}
 		
 	}
 	return;
@@ -164,7 +167,7 @@ void write_image_to_file(void)
 	write_wifi_command(string, 2);
 	delay_ms(100);
 	
- 	//while(!start_image_transfer) 	{}
+ 	while(!start_image_transfer){}
 	
 	uint32_t img = start_of_image;
 	while (img < end_of_image)
@@ -189,7 +192,7 @@ void process_data_wifi(void) {
 	if (strstr(input_line_wifi, "None")) {
 		wait_flag = 1;
 	} 
-	if (strstr(input_line_wifi, "Image")){
+	if (strstr(input_line_wifi, "image_transfer")){
 		start_image_transfer = 1;
 	}
 }
