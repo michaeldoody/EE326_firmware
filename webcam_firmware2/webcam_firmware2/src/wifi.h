@@ -55,7 +55,7 @@
 
 
 void wifi_usart_handler(void);
-static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask);
+void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask);
 void wifi_web_setup_handler(uint32_t ul_id, uint32_t ul_mask);
 void configure_usart_wifi(void);
 void configure_wifi_command_pin(void);

@@ -32,7 +32,7 @@ void USART_Handler(void)
 	}
 }
 
-static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask)
+void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask)
 {
 	unused(ul_id);
 	unused(ul_mask);
@@ -161,13 +161,10 @@ void write_image_to_file(void)
 	image_length = end_of_image - start_of_image;
 	char string[100] = {0};
 	sprintf(string,"image_transfer %u\r\n\0", image_length);
-	write_wifi_command(string, 20);
+	write_wifi_command(string, 2);
 	delay_ms(100);
 	
- 	while(!start_image_transfer) 	{
-		 
- 		
- 	}
+ 	//while(!start_image_transfer) 	{}
 	
 	uint32_t img = start_of_image;
 	while (img < end_of_image)

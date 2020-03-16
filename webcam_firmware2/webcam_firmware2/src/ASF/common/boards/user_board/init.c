@@ -21,8 +21,8 @@ void board_init(void)
 	ioport_set_pin_dir(WIFI_RESET_PIN, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_level(WIFI_RESET_PIN, true);
 	
-	ioport_set_pin_dir(PIN_LED, IOPORT_DIR_OUTPUT);
-	ioport_set_pin_level(PIN_LED, false);
+	//ioport_set_pin_dir(PIN_LED, IOPORT_DIR_OUTPUT);
+	//ioport_set_pin_level(PIN_LED, false);
 	
 	ioport_set_pin_dir(WIFI_CTS_PIN, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_level(WIFI_CTS_PIN, false);
