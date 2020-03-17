@@ -29,8 +29,6 @@ int main (void)
 	init_camera();
 	configure_camera();
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 	write_wifi_command("set uart.flow 0 on \r\n", 2);
 	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 2);
 	write_wifi_command("set sy i g wlan 20\r\n", 2);
@@ -48,15 +46,14 @@ int main (void)
 	ioport_set_pin_level(WIFI_RESET_PIN, 1);
 		
 	wifi_setup_button_flag=false;
-=======
+
 	write_wifi_command("set sy c p off\r\n", 2);
->>>>>>> parent of 8583d8d... Updated write_image to file
-=======
-	write_wifi_command("set sy c p off\r\n", 2);
->>>>>>> parent of 8583d8d... Updated write_image to file
+	write_wifi_command("set sy c e on\r\n", 2);
+
 	
 	while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 		if (wifi_setup_button_flag){
+			write_wifi_command("setup web\r\n", 1);
 			write_wifi_command("setup web\r\n", 1);
 			delay_ms(100);
 			wifi_setup_button_flag = 0;
@@ -64,8 +61,7 @@ int main (void)
 		
 	}
 
-<<<<<<< HEAD
-=======
+
 	write_wifi_command("set uart.flow 0 on \r\n", 2);
 	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 2);
 	write_wifi_command("set sy i g wlan 20\r\n", 2);
@@ -77,31 +73,12 @@ int main (void)
 	write_wifi_command("reboot\r\n", 2);
 	
 
-	
-<<<<<<< HEAD
->>>>>>> parent of 8583d8d... Updated write_image to file
+
 
 	// tell wifi to turn off command prompt and echo
-	
-=======
 
-	// tell wifi to turn off command prompt and echo
-	
 
-	
-	
-	
-	
-	
-	// tell Wifi to turn off command prompt and echo
->>>>>>> parent of 8583d8d... Updated write_image to file
 
-	
-	
-	
-	
-	
-	// tell Wifi to turn off command prompt and echo
 	wifi_setup_button_flag=false;
 	
 	while(1) {
@@ -124,8 +101,7 @@ int main (void)
 			ioport_set_pin_level(WIFI_RESET_PIN, 1);
 			delay_ms(500);
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		write_wifi_command("poll all\r\n", 1);
 		
 		while(1) {
@@ -137,9 +113,7 @@ int main (void)
 					write_image_to_file();
 				}
 			}
-=======
-=======
->>>>>>> parent of 8583d8d... Updated write_image to file
+
 		write_wifi_command("poll all\r\n", 5);
 		if(wait_flag){
 			delay_ms(1000);
@@ -148,12 +122,7 @@ int main (void)
 			uint8_t get_image = start_capture();
 			write_image_to_file();
 		}
-<<<<<<< HEAD
->>>>>>> parent of 8583d8d... Updated write_image to file
-=======
->>>>>>> parent of 8583d8d... Updated write_image to file
-		
-		
+
 	}
 	
 	

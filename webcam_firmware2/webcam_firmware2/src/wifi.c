@@ -162,17 +162,15 @@ void write_image_to_file(void)
 	}
 	
 	image_length = end_of_image - start_of_image;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	char string[100] = {0};
 	sprintf(string,"image_transfer %u\r\n\0", image_length);
 	write_wifi_command(string, 2);
 	delay_ms(100);
 	
  	while(!start_image_transfer){}
-=======
-=======
->>>>>>> parent of 8583d8d... Updated write_image to file
+
+
 	char string[50] = {0};
 	sprintf(string,"image_transfer %d\r\n", image_length);
 	write_wifi_command(string, 20);
@@ -182,10 +180,6 @@ void write_image_to_file(void)
 // 	{
 // 		
 // 	}
-<<<<<<< HEAD
->>>>>>> parent of 8583d8d... Updated write_image to file
-=======
->>>>>>> parent of 8583d8d... Updated write_image to file
 	
 	uint32_t img = start_of_image;
 	while (img < end_of_image)
