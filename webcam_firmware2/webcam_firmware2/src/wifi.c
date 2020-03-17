@@ -18,7 +18,7 @@ volatile uint32_t image_length=0;
 volatile uint32_t start_image_transfer = 0;
 volatile uint32_t wait_flag = 0;
 
-void wifi_usart_handler(void)
+void USART_Handler(void)
 {
 	uint32_t ul_status;
 
@@ -156,29 +156,25 @@ void write_wifi_command(char* comm, uint8_t cnt)
 
 void write_image_to_file(void)
 {
+	start_image_transfer=0;
+	
 	if (find_image_len()==0)
 	{
 		return;
 	}
 	
 	image_length = end_of_image - start_of_image;
-
 	char string[100] = {0};
 	sprintf(string,"image_transfer %u\r\n\0", image_length);
 	write_wifi_command(string, 2);
 	delay_ms(100);
 	
- 	while(!start_image_transfer){}
-
-	char string[50] = {0};
-	sprintf(string,"image_transfer %d\r\n", image_length);
-	write_wifi_command(string, 20);
-	delay_ms(100);
+	counts = 0;
+	process_data_wifi();
 	
-// 	while(!wifi_comm_success)
-// 	{
-// 		
-// 	}
+	while(!start_image_transfer && counts<10){}
+	
+	if(counts>=10){return;}
 	
 	uint32_t img = start_of_image;
 	while (img < end_of_image)
@@ -203,7 +199,7 @@ void process_data_wifi(void) {
 	if (strstr(input_line_wifi, "None")) {
 		wait_flag = 1;
 	} 
-	if (strstr(input_line_wifi, "image_transfer")){
+	if (strstr(input_line_wifi, "Start transfer")){
 		start_image_transfer = 1;
 	}
 }
