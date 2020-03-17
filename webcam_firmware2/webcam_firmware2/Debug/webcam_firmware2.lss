@@ -7191,7 +7191,7 @@ void process_data_wifi(void) {
   4029c4:	b580      	push	{r7, lr}
   4029c6:	af00      	add	r7, sp, #0
 	
-	if (strstr(input_line_wifi, "None") != NULL) {
+	if (strstr(input_line_wifi, "None")) {
   4029c8:	490a      	ldr	r1, [pc, #40]	; (4029f4 <process_data_wifi+0x30>)
   4029ca:	480b      	ldr	r0, [pc, #44]	; (4029f8 <process_data_wifi+0x34>)
   4029cc:	4b0b      	ldr	r3, [pc, #44]	; (4029fc <process_data_wifi+0x38>)
@@ -7204,7 +7204,7 @@ void process_data_wifi(void) {
   4029d8:	2201      	movs	r2, #1
   4029da:	601a      	str	r2, [r3, #0]
 	} 
-	if (strstr(input_line_wifi, "image_transfer") != NULL){
+	if (strstr(input_line_wifi, "image_transfer")){
   4029dc:	4909      	ldr	r1, [pc, #36]	; (402a04 <process_data_wifi+0x40>)
   4029de:	4806      	ldr	r0, [pc, #24]	; (4029f8 <process_data_wifi+0x34>)
   4029e0:	4b06      	ldr	r3, [pc, #24]	; (4029fc <process_data_wifi+0x38>)
