@@ -29,6 +29,7 @@ int main (void)
 	init_camera();
 	configure_camera();
 	
+<<<<<<< HEAD
 	write_wifi_command("set uart.flow 0 on \r\n", 2);
 	write_wifi_command("set bus.command.rx_bufsize 5000\r\n", 2);
 	write_wifi_command("set sy i g wlan 20\r\n", 2);
@@ -50,6 +51,9 @@ int main (void)
 	write_wifi_command("set sy c p off\r\n", 2);
 	write_wifi_command("set sy c e on\r\n", 2);
 
+=======
+	write_wifi_command("set sy c p off\r\n", 2);
+>>>>>>> parent of 8583d8d... Updated write_image to file
 	
 	while (ioport_get_pin_level(WIFI_STATUS)==0) { //wait for network connection
 		if (wifi_setup_button_flag){
@@ -73,9 +77,20 @@ int main (void)
 	write_wifi_command("reboot\r\n", 2);
 	
 
-
+	
 
 	// tell wifi to turn off command prompt and echo
+<<<<<<< HEAD
+=======
+	
+
+	
+	
+	
+	
+	
+	// tell Wifi to turn off command prompt and echo
+>>>>>>> parent of 8583d8d... Updated write_image to file
 
 
 
@@ -101,6 +116,7 @@ int main (void)
 			ioport_set_pin_level(WIFI_RESET_PIN, 1);
 			delay_ms(500);
 		}
+<<<<<<< HEAD
 
 		write_wifi_command("poll all\r\n", 1);
 		
@@ -114,6 +130,8 @@ int main (void)
 				}
 			}
 
+=======
+>>>>>>> parent of 8583d8d... Updated write_image to file
 		write_wifi_command("poll all\r\n", 5);
 		if(wait_flag){
 			delay_ms(1000);
@@ -122,7 +140,12 @@ int main (void)
 			uint8_t get_image = start_capture();
 			write_image_to_file();
 		}
+<<<<<<< HEAD
 
+=======
+		
+		
+>>>>>>> parent of 8583d8d... Updated write_image to file
 	}
 	
 	
