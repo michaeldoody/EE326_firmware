@@ -18,7 +18,7 @@ volatile uint32_t image_length=0;
 volatile uint32_t start_image_transfer = 0;
 volatile uint32_t wait_flag = 0;
 
-void USART_Handler(void)
+void wifi_usart_handler(void)
 {
 	uint32_t ul_status;
 
@@ -162,12 +162,24 @@ void write_image_to_file(void)
 	}
 	
 	image_length = end_of_image - start_of_image;
+<<<<<<< HEAD
 	char string[100] = {0};
 	sprintf(string,"image_transfer %u\r\n\0", image_length);
 	write_wifi_command(string, 2);
 	delay_ms(100);
 	
  	while(!start_image_transfer){}
+=======
+	char string[50] = {0};
+	sprintf(string,"image_transfer %d\r\n", image_length);
+	write_wifi_command(string, 20);
+	delay_ms(100);
+	
+// 	while(!wifi_comm_success)
+// 	{
+// 		
+// 	}
+>>>>>>> parent of 8583d8d... Updated write_image to file
 	
 	uint32_t img = start_of_image;
 	while (img < end_of_image)
