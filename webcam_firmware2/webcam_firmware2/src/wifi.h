@@ -39,7 +39,7 @@
 
 #define WIFI_COMM_ID            ID_PIOB
 #define WIFI_COMM_PIO           PIOB
-#define WIFI_COMM_PIN_MSK       PIO_PB10
+#define WIFI_COMM_PIN_MSK       PIO_PB11
 #define WIFI_COMM_ATTR          PIO_IT_RISE_EDGE
 
 #define WEB_SETUP_BUTTON_ID            ID_PIOA
@@ -47,15 +47,15 @@
 #define WEB_SETUP_BUTTON_PIN_MSK       PIO_PA22
 #define WEB_SETUP_BUTTON_ATTR          PIO_IT_RISE_EDGE
 
-#define WIFI_RESET_PIN					PIO_PA0_IDX
-#define WIFI_STATUS						PIO_PA10_IDX					
+#define WIFI_RESET_PIN					PIO_PB0_IDX
+#define WIFI_STATUS						PIO_PB13_IDX					
 #define RESET_CAMERA_PIN				PIO_PA20_IDX
 #define IMAGE_WIDTH                    (320UL)
 #define IMAGE_HEIGHT                   (240UL)
 
 
 void wifi_usart_handler(void);
-static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask);
+void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask);
 void wifi_web_setup_handler(uint32_t ul_id, uint32_t ul_mask);
 void configure_usart_wifi(void);
 void configure_wifi_command_pin(void);

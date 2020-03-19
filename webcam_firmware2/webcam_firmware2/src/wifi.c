@@ -32,7 +32,7 @@ void USART_Handler(void)
 	}
 }
 
-static void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask)
+void wifi_command_response_handler(uint32_t ul_id, uint32_t ul_mask)
 {
 	unused(ul_id);
 	unused(ul_mask);
@@ -146,6 +146,9 @@ void write_wifi_command(char* comm, uint8_t cnt)
 			wifi_comm_success = false;
 			return;
 		}
+		else{
+			counts++;
+		}
 		
 	}
 	return;
@@ -153,6 +156,8 @@ void write_wifi_command(char* comm, uint8_t cnt)
 
 void write_image_to_file(void)
 {
+	start_image_transfer=0;
+	
 	if (find_image_len()==0)
 	{
 		return;
@@ -161,13 +166,15 @@ void write_image_to_file(void)
 	image_length = end_of_image - start_of_image;
 	char string[100] = {0};
 	sprintf(string,"image_transfer %u\r\n\0", image_length);
-	write_wifi_command(string, 20);
+	write_wifi_command(string, 2);
 	delay_ms(100);
 	
- 	while(!start_image_transfer) 	{
-		 
- 		
- 	}
+	counts = 0;
+	process_data_wifi();
+	
+	while(!start_image_transfer && counts<10){}
+	
+	if(counts>=10){return;}
 	
 	uint32_t img = start_of_image;
 	while (img < end_of_image)
@@ -176,8 +183,7 @@ void write_image_to_file(void)
 		img++;
 	}
 	
-	usart_write_line(WIFI_USART, "Complete\r\n");
-	delay_s(2);
+	delay_ms(200);
 	
 }
 
@@ -192,7 +198,7 @@ void process_data_wifi(void) {
 	if (strstr(input_line_wifi, "None")) {
 		wait_flag = 1;
 	} 
-	if (strstr(input_line_wifi, "Image")){
+	if (strstr(input_line_wifi, "Start transfer")){
 		start_image_transfer = 1;
 	}
 }

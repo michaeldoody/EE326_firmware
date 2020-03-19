@@ -40,7 +40,7 @@
 /** Enable Com Port. */
 #define CONF_BOARD_UART_CONSOLE
 
-#define PIN_LED							PIO_PA22_IDX
+//#define PIN_LED							PIO_PA22_IDX
 #define WIFI_CTS_PIN					PIO_PA7_IDX
 #define WIFI_RTS_PIN					PIO_PA8_IDX
 #define CAM_RST							PIO_PA20_IDX
