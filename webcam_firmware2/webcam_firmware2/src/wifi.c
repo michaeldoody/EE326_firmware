@@ -183,8 +183,7 @@ void write_image_to_file(void)
 		img++;
 	}
 	
-	usart_write_line(WIFI_USART, "Complete\r\n");
-	delay_s(2);
+	delay_ms(200);
 	
 }
 
